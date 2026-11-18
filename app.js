@@ -9,3 +9,21 @@ const productos = [
     { id: 8, nombre: "Soporte para portátil", precio: 65000, categoria: "Accesorios", stock: 5 },
     { id: 9, nombre: "Webcam HD", precio: 110000, categoria: "Accesorios", stock: 4 }
 ];
+
+let carrito = [];
+let categoriaSeleccionada = "Todas";
+
+const catalogo = document.getElementById("catalogo");
+const filtros = document.getElementById("filtros");
+const listaCarrito = document.getElementById("lista-carrito");
+const contadorProductos = document.getElementById("contador-productos");
+const totalArticulos = document.getElementById("total-articulos");
+const subtotalElemento = document.getElementById("subtotal");
+const descuentoElemento = document.getElementById("descuento");
+const totalElemento = document.getElementById("total");
+const botonVaciar = document.getElementById("vaciar-carrito");
+
+const formatoPrecio = (valor) => {
+    return "$" + valor.toLocaleString("es-CO");
+};
+
