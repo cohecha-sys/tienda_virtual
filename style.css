@@ -54,3 +54,83 @@ body {
 .bienvenida h1 {
     font-size: 27px;
 }
+
+.seccion-catalogo,
+.seccion-carrito {
+    margin-top: 40px;
+}
+
+h2 {
+    border-bottom: 3px dashed #9b4d75;
+    padding-bottom: 12px;
+}
+
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.boton-filtro {
+    background-color: #fff4d8;
+    border: 2px solid #302746;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.boton-filtro:hover,
+.boton-filtro.activo {
+    background-color: #9b4d75;
+    color: white;
+}
+
+#contador-productos {
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.catalogo {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.tarjeta {
+    background-color: #fffaf0;
+    border: 3px solid #302746;
+    padding: 18px;
+    box-shadow: 5px 5px #c58ca7;
+    display: flex;
+    flex-direction: column;
+}
+
+.tarjeta h3 {
+    font-size: 20px;
+}
+
+.categoria-producto {
+    background-color: #d8c8ed;
+    padding: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    align-self: flex-start;
+}
+
+.precio {
+    color: #9b4d75;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.stock {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.boton {
+    border: 2px solid #302746;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
