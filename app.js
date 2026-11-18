@@ -27,3 +27,27 @@ const formatoPrecio = (valor) => {
     return "$" + valor.toLocaleString("es-CO");
 };
 
+function mostrarFiltros() {
+    const categorias = ["Todas", ...new Set(productos.map(producto => producto.categoria))];
+
+    filtros.innerHTML = "";
+
+    categorias.forEach(categoria => {
+        const boton = document.createElement("button");
+
+        boton.textContent = categoria;
+        boton.classList.add("boton-filtro");
+
+        if (categoria === categoriaSeleccionada) {
+            boton.classList.add("activo");
+        }
+
+        boton.addEventListener("click", () => {
+            categoriaSeleccionada = categoria;
+            mostrarFiltros();
+            mostrarProductos();
+        });
+
+        filtros.appendChild(boton);
+    });
+}
