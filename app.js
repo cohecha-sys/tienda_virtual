@@ -193,3 +193,40 @@ function eliminarDelCarrito(id) {
     mostrarProductos();
 }
 
+function actualizarResumen() {
+    let cantidadTotal = 0;
+    let subtotal = 0;
+
+    carrito.forEach(item => {
+        const producto = productos.find(producto => producto.id === item.id);
+
+        cantidadTotal += item.cantidad;
+        subtotal += producto.precio * item.cantidad;
+    });
+
+    let descuento = 0;
+
+    if (subtotal >= 300000) {
+        descuento = subtotal * 0.10;
+    }
+
+    const total = subtotal - descuento;
+
+    totalArticulos.textContent = cantidadTotal;
+    subtotalElemento.textContent = formatoPrecio(subtotal);
+    descuentoElemento.textContent = formatoPrecio(descuento);
+    totalElemento.textContent = formatoPrecio(total);
+}
+
+function vaciarCarrito() {
+    carrito = [];
+
+    mostrarCarrito();
+    mostrarProductos();
+}
+
+botonVaciar.addEventListener("click", vaciarCarrito);
+
+mostrarFiltros();
+mostrarProductos();
+mostrarCarrito();
