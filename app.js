@@ -51,3 +51,43 @@ function mostrarFiltros() {
         filtros.appendChild(boton);
     });
 }
+
+function mostrarProductos() {
+    catalogo.innerHTML = "";
+
+    const productosFiltrados = productos.filter(producto => {
+        return categoriaSeleccionada === "Todas" || producto.categoria === categoriaSeleccionada;
+    });
+
+    contadorProductos.textContent = `Mostrando ${productosFiltrados.length} productos`;
+
+    productosFiltrados.forEach(producto => {
+        const productoEnCarrito = carrito.find(item => item.id === producto.id);
+        const cantidadEnCarrito = productoEnCarrito ? productoEnCarrito.cantidad : 0;
+        const stockDisponible = producto.stock - cantidadEnCarrito;
+
+        const tarjeta = document.createElement("div");
+        tarjeta.classList.add("producto-card");
+
+        tarjeta.innerHTML = `
+            <div class="producto-info">
+                <h3>${producto.nombre}</h3>
+                <p>${producto.categoria}</p>
+                <h4>${formatoPrecio(producto.precio)}</h4>
+                <p>Stock disponible: ${stockDisponible}</p>
+                ${stockDisponible === 0 ? "<p>Agotado</p>" : ""}
+                <button class="boton-agregar" data-id="${producto.id}" ${stockDisponible === 0 ? "disabled" : ""}>
+                    ${stockDisponible === 0 ? "Agotado" : "Agregar al carrito"}
+                </button>
+            </div>
+        `;
+
+        catalogo.appendChild(tarjeta);
+    });
+
+    document.querySelectorAll(".boton-agregar").forEach(boton => {
+        boton.addEventListener("click", () => {
+            agregarAlCarrito(Number(boton.dataset.id));
+        });
+    });
+}
