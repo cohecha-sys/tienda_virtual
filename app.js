@@ -112,3 +112,84 @@ function agregarAlCarrito(id) {
     mostrarProductos();
     mostrarCarrito();
 }
+
+function mostrarCarrito() {
+    listaCarrito.innerHTML = "";
+
+    if (carrito.length === 0) {
+        listaCarrito.innerHTML = "<p>Tu carrito está vacío</p>";
+    }
+
+    carrito.forEach(item => {
+        const producto = productos.find(producto => producto.id === item.id);
+
+        const elemento = document.createElement("div");
+        elemento.classList.add("producto-carrito");
+
+        elemento.innerHTML = `
+            <div>
+                <h4>${producto.nombre}</h4>
+                <p>Precio: ${formatoPrecio(producto.precio)}</p>
+                <p>Subtotal: ${formatoPrecio(producto.precio * item.cantidad)}</p>
+            </div>
+
+            <div>
+                <button class="boton-restar" data-id="${item.id}">-</button>
+                <span>${item.cantidad}</span>
+                <button class="boton-sumar" data-id="${item.id}" ${item.cantidad >= producto.stock ? "disabled" : ""}>+</button>
+                <button class="boton-eliminar" data-id="${item.id}">Eliminar</button>
+            </div>
+        `;
+
+        listaCarrito.appendChild(elemento);
+    });
+
+    document.querySelectorAll(".boton-sumar").forEach(boton => {
+        boton.addEventListener("click", () => {
+            cambiarCantidad(Number(boton.dataset.id), 1);
+        });
+    });
+
+    document.querySelectorAll(".boton-restar").forEach(boton => {
+        boton.addEventListener("click", () => {
+            cambiarCantidad(Number(boton.dataset.id), -1);
+        });
+    });
+
+    document.querySelectorAll(".boton-eliminar").forEach(boton => {
+        boton.addEventListener("click", () => {
+            eliminarDelCarrito(Number(boton.dataset.id));
+        });
+    });
+
+    actualizarResumen();
+}
+
+function cambiarCantidad(id, cambio) {
+    const item = carrito.find(producto => producto.id === id);
+    const producto = productos.find(producto => producto.id === id);
+
+    if (!item) return;
+
+    const nuevaCantidad = item.cantidad + cambio;
+
+    if (nuevaCantidad > producto.stock) return;
+
+    if (nuevaCantidad <= 0) {
+        eliminarDelCarrito(id);
+        return;
+    }
+
+    item.cantidad = nuevaCantidad;
+
+    mostrarCarrito();
+    mostrarProductos();
+}
+
+function eliminarDelCarrito(id) {
+    carrito = carrito.filter(item => item.id !== id);
+
+    mostrarCarrito();
+    mostrarProductos();
+}
+
