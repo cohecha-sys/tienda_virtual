@@ -208,3 +208,79 @@ h2 {
     color: #9b4d75;
     font-weight: bold;
 }
+
+.boton-eliminar {
+    background-color: #e76f51;
+    color: white;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.pie-carrito {
+    display: grid;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.boton-secundario {
+    background-color: #302746;
+    color: white;
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.resumen {
+    background-color: #d8c8ed;
+    border: 4px solid #302746;
+    padding: 20px;
+    box-shadow: 5px 5px #9b4d75;
+}
+
+.resumen p {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.total-final {
+    border-top: 2px dashed #302746;
+    padding-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    color: #9b4d75;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+footer {
+    background-color: #302746;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+@media (min-width: 600px) {
+    .catalogo {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .item-carrito {
+        grid-template-columns: 1.5fr 1fr 1fr auto;
+        align-items: center;
+    }
+
+    .pie-carrito {
+        grid-template-columns: auto 1fr;
+        align-items: start;
+    }
+}
+
+@media (min-width: 900px) {
+    .catalogo {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
