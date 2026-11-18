@@ -91,3 +91,24 @@ function mostrarProductos() {
         });
     });
 }
+
+function agregarAlCarrito(id) {
+    const producto = productos.find(item => item.id === id);
+    const productoEnCarrito = carrito.find(item => item.id === id);
+
+    const cantidadActual = productoEnCarrito ? productoEnCarrito.cantidad : 0;
+
+    if (cantidadActual < producto.stock) {
+        if (productoEnCarrito) {
+            productoEnCarrito.cantidad++;
+        } else {
+            carrito.push({
+                id: producto.id,
+                cantidad: 1
+            });
+        }
+    }
+
+    mostrarProductos();
+    mostrarCarrito();
+}
